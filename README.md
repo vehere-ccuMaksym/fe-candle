@@ -21,7 +21,7 @@ A small React + TypeScript single-page application for visualizing live crypto m
 - Styling: Tailwind CSS
 - Charts: `react-google-charts` (CandlestickChart)
 - WebSocket client: `react-use-websocket`
-- State: Local React state (project includes `mobx` / `mobx-react` in package.json but core code uses React state)
+- State Management: `mobx` / `mobx-react`
 - Testing: Vitest + Testing Library (`vitest`, `@testing-library/react`, `@testing-library/jest-dom`)
 - Dev tooling: `@vitejs/plugin-react`, `typescript`, `jsdom`, `biome` available in devDependencies
 
@@ -44,8 +44,6 @@ A small React + TypeScript single-page application for visualizing live crypto m
     - Transform candle API responses using `ArrAPItoChartData`.
     - Subscribe to WebSocket via `sendJsonMessage({ type: "subscribe", pair, stream })`.
     - Update local state on incoming `lastJsonMessage` values.
-  - Notes:
-    - Imports `Activity` from `"react"` in the current source; React does not export `Activity` by default. Tests add a minimal `Activity` mock. Consider replacing this import with a local `Activity` component or removing the named import.
 
 - `src/components/CandleChart/CandleChart.tsx`
   - Uses: `react-google-charts`'s `Chart` component.
@@ -80,6 +78,7 @@ A small React + TypeScript single-page application for visualizing live crypto m
   - Incoming messages appear in `lastJsonMessage`. `App` handles `type === 'candle_update' | 'initial_candles'` and orderbook-related message types, updating state appropriately.
 
 ## Scripts
-- Install dependencies:
+- Install dependencies and run project:
 ```powershell
 npm install
+npm run dev
